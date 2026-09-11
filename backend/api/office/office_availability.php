@@ -1,6 +1,6 @@
 <?php
-
-header("Access-Control-Allow-Origin: http://localhost:3000");
+include ("../../config/allows-origin.php");
+header("Access-Control-Allow-Origin: $allows_origin");
 header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");

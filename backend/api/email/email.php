@@ -1,10 +1,12 @@
 <?php
+require_once "../../config/database_config.php";
+include ("../../config/allows-origin.php");
+include ("email_sending.php");
 date_default_timezone_set('Asia/Manila');
-header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Origin: $allows_origin");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: application/json');
-require_once "../../config/database_config.php";
 
 $email = $_POST['email'] ?? '';
 
@@ -35,6 +37,8 @@ $sqlInsert = "INSERT INTO email (email, ticket_no, appointment_time) VALUES (:em
 $stmt = $pdo->prepare($sqlInsert);
 $stmt-> execute([':email' => $email, ':ticket_no' => $ticketNumber, ":appointment_time" => $appointmentTime]);
 
+sendEmailConfirmation($ticketNumber, $email, $appointmentTime);
+
 //send the response to the frontend via api calling
 echo json_encode([
     "success" => true,
@@ -44,4 +48,3 @@ echo json_encode([
     "appointment_time" => $appointmentTime,
     "people_ahead" => $peopleAhead
 ]);
-?>
