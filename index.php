@@ -5,7 +5,7 @@
     <main>
         <form action="app/controllers/emailController.php" method="post">
             <input type="text" placeholder="Enter your text here" type="email" name="email">
-            <button type="submit">Submit</button>
+            <button type="submit">Submits</button>
         </form>
     </main>
 
