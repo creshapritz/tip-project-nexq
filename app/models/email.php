@@ -20,7 +20,7 @@ class Email {
         $ticketNumber = $count + 1;
 
         //getting people ahead and calculating serving time
-        $sql = "SELECT COUNT(*) FROM email WHERE DATE(timestamp) = CURDATE() AND status IN ('Waiting', 'Serving')";
+        $sql = "SELECT COUNT(*) FROM email WHERE DATE(timestamp) = CURDATE() AND status IN ('WAITING', 'Serving')";
         $stmt = $this->conn->prepare($sql);
         $stmt-> execute();
         $peopleAhead = $stmt->fetchColumn();
